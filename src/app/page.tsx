@@ -9,7 +9,7 @@ import {
   GitHubIcon,
   InstagramIcon,
   LinkedInIcon,
-  XIcon,
+  SubstackIcon,
 } from '@/components/SocialIcons'
 import logoAirbnb from '@/images/logos/airbnb.svg'
 import logoFacebook from '@/images/logos/facebook.svg'
@@ -275,28 +275,31 @@ export default async function Home() {
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            Software designer, founder, and amateur astronaut.
+            Paul, Technically Speaking
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I’m Spencer, a software designer and entrepreneur based in New York
-            City. I’m the founder and CEO of Planetaria, where we develop
-            technologies that empower regular people to explore space on their
-            own terms.
+            A software engineer and product-oriented problem solver working at
+            the intersection of engineering, design, and operations. This is
+            where I break down what I build and what I’m learning along the way.
           </p>
           <div className="mt-6 flex gap-6">
-            <SocialLink href="#" aria-label="Follow on X" icon={XIcon} />
             <SocialLink
-              href="#"
+              href="https://substack.com/@paulbarron36"
+              aria-label="Follow on Substack"
+              icon={SubstackIcon}
+            />
+            <SocialLink
+              href="https://www.instagram.com/paulgorithm/"
               aria-label="Follow on Instagram"
               icon={InstagramIcon}
             />
             <SocialLink
-              href="#"
+              href="https://github.com/PudparK"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
             />
             <SocialLink
-              href="#"
+              href="https://www.linkedin.com/in/paul-barron/"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
             />

@@ -34,3 +34,13 @@ export function LinkedInIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     </svg>
   )
 }
+
+export function SubstackIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path d="M1.96484 0.624512H18.0354V2.70052H1.96484V0.624512Z"></path>
+      <path d="M1.96484 4.77655H18.0354V6.85254H1.96484V4.77655Z"></path>
+      <path d="M1.96484 8.92857V19.9505L10.0001 14.6347L18.0354 19.9505V8.92857H1.96484Z"></path>
+    </svg>
+  )
+}

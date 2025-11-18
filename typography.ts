@@ -118,7 +118,7 @@ export default {
             transitionTimingFunction: theme('transitionTimingFunction.in-out'),
           },
           'a:hover': {
-            color: 'var(--tw-prose-links-hover)',
+            color: "'var(--tw-prose-links-hover)'",
             textDecorationColor: 'var(--tw-prose-underline-hover)',
           },
           strong: {
