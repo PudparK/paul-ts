@@ -75,13 +75,13 @@ export default function About() {
               src={portraitImage}
               alt=""
               sizes="(min-width: 1024px) 32rem, 20rem"
-              className="-aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
+              className="-aspect-square rotate-3 rounded-xl bg-zinc-100 object-cover dark:bg-zinc-800"
             />
           </div>
         </div>
         <div className="lg:order-first lg:row-span-2">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            I’m Paul Barrón. I'm in Houston building stuff with tech.
+            I’m Paul Barrón, a Houston-based engineer building things with tech.
           </h1>
           <div className="mt-4 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <div className="flex flex-wrap gap-2">
@@ -94,10 +94,19 @@ export default function About() {
             <p>
               I’ve always been the type who needs to know how things work. I
               started tinkering in the dial-up and AOL days, breaking and fixing
-              anything I could. Before I wrote real code, I spent years doing
+              anything I could. Before I wrote a line of code, I spent years doing
               design, video editing, and running a small marketing agency. That
               mix of experience eventually led me into software engineering.
             </p>
+            <figure className="mt-10 border-l border-teal-600 pl-9 dark:border-teal-400">
+              <blockquote className="font-semibold text-gray-900 dark:text-white">
+                <p>
+                 “Before I wrote a line of code, I spent years
+              designing, video editing, and running a small marketing agency. That
+              mix of experience eventually led me into software engineering.”
+                </p>
+              </blockquote>
+            </figure>
             <p>
               I never took the traditional CS route. No coding camps, no early
               classes. I learned by doing. Trial and error, late nights, broken
@@ -106,15 +115,6 @@ export default function About() {
               defining the real problem is just as valuable as building the
               solution.
             </p>
-            <figure className="mt-10 border-l border-teal-600 pl-9 dark:border-teal-400">
-              <blockquote className="font-semibold text-gray-900 dark:text-white">
-                <p>
-                  "I think a lot about how to explain things in a way that feels
-                  clear and welcoming… and that’s why I share what I’ve learned
-                  and what I’m still learning."
-                </p>
-              </blockquote>
-            </figure>
             <p>
               Over the years, I’ve worked at three different health tech
               startups, and each stop pushed my skills further in engineering,
@@ -122,15 +122,15 @@ export default function About() {
               how messy real-world systems can be and how much good software
               matters when it affects people’s lives.
             </p>
+<figure className="mt-10 border-l border-teal-600 pl-9 dark:border-teal-400">
+              <blockquote className="font-semibold text-gray-900 dark:text-white">
+                <p>
+                "...I taught for years, which means I naturally lean toward breaking things down in a way that feels clear and welcoming."
+                </p>
+              </blockquote>
+            </figure>
             <p>
-              Today, I work at the overlap of engineering, design, and
-              operations, building systems that help real people in complex,
-              high-stakes environments. And because I’m a former bilingual
-              teacher, I think a lot about how to explain things in a way that
-              feels clear and welcoming. That’s why I use this space to share
-              what I’ve learned and what I’m still learning, so others,
-              especially young Latino professionals, can see a path into tech
-              that feels a little more like theirs.
+              Today, I work at the overlap of engineering, systems design, and operations, building systems that help real people in complex, high-stakes environments. Before tech, I taught for years, which means I naturally lean toward breaking things down in a way that feels clear and welcoming. This space lets me do that. It’s where I show the work, the process, and the things I’m still figuring out, so others — especially young Latino professionals — can see a path into tech that feels a little more like theirs.
             </p>
           </div>
         </div>
