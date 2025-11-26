@@ -25,9 +25,6 @@ export async function GET(req: NextRequest) {
     const igRes = await fetch(url, { cache: 'no-store' })
     const text = await igRes.text()
 
-    console.log('[avatar] IG status:', igRes.status)
-    console.log('[avatar] IG body:', text)
-
     if (!igRes.ok) {
       // For debug mode, send the raw error up so you can see it in the browser
       if (debug) {

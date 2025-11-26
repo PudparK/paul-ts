@@ -11,10 +11,10 @@ import {
   LinkedInIcon,
   SubstackIcon,
 } from '@/components/SocialIcons'
-import logoAirbnb from '@/images/logos/airbnb.svg'
-import logoFacebook from '@/images/logos/facebook.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
-import logoStarbucks from '@/images/logos/starbucks.svg'
+import logoDonJeterElementary from '@/images/logos/don-jeter-elementary.jpg'
+import logo132Design from '@/images/logos/132design.jpg'
+import logoOrdrs from '@/images/logos/ordrs.jpg'
+import logoZocaloHealth from '@/images/logos/zocalo-health.svg'
 import image1 from '@/images/photos/image-1.jpg'
 import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
@@ -107,8 +107,14 @@ function Role({ role }: { role: Role }) {
 
   return (
     <li className="flex gap-4">
-      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-        <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
+      <div className="relative mt-1 flex h-12 w-12 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+        <Image
+          src={role.logo} // your PNG or JPG
+          alt={role.company}
+          width={28}
+          height={28}
+          className="h-10 w-10 rounded-full object-cover"
+        />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
@@ -136,9 +142,9 @@ function Role({ role }: { role: Role }) {
 function Resume() {
   let resume: Array<Role> = [
     {
-      company: 'Planetaria',
-      title: 'CEO',
-      logo: logoPlanetaria,
+      company: 'Zocalo Health',
+      title: 'TPM & Software Engineer',
+      logo: logoZocaloHealth,
       start: '2019',
       end: {
         label: 'Present',
@@ -146,25 +152,25 @@ function Resume() {
       },
     },
     {
-      company: 'Airbnb',
-      title: 'Product Designer',
-      logo: logoAirbnb,
-      start: '2014',
-      end: '2019',
+      company: 'ORDRS',
+      title: 'Tech Lead & Software Engineer',
+      logo: logoOrdrs,
+      start: '2021',
+      end: '2023',
     },
     {
-      company: 'Facebook',
-      title: 'iOS Software Engineer',
-      logo: logoFacebook,
+      company: '132 Design',
+      title: 'Founder',
+      logo: logo132Design,
       start: '2011',
-      end: '2014',
+      end: '2021',
     },
     {
-      company: 'Starbucks',
-      title: 'Shift Supervisor',
-      logo: logoStarbucks,
-      start: '2008',
-      end: '2011',
+      company: 'Don Jeter Elementary School',
+      title: 'Bilingual Teacher',
+      logo: logoDonJeterElementary,
+      start: '2012',
+      end: '2020',
     },
   ]
 
