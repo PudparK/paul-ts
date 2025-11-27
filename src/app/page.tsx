@@ -13,7 +13,7 @@ import {
 } from '@/components/SocialIcons'
 import logoDonJeterElementary from '@/images/logos/don-jeter-elementary.jpg'
 import logo132Design from '@/images/logos/132design.jpg'
-import logoOrdrs from '@/images/logos/ordrs.jpg'
+import logoOrdrs from '@/images/logos/ordrs.svg'
 import logoZocaloHealth from '@/images/logos/zocalo-health.svg'
 import image1 from '@/images/photos/image-1.jpg'
 import image2 from '@/images/photos/image-2.jpg'
