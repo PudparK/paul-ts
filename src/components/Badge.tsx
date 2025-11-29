@@ -80,20 +80,31 @@ const colorMap = {
     'dark:text-teal-400',
     'dark:inset-ring-teal-400/20',
   ].join(' '),
+  softTeal: [
+    'bg-teal-50/40',
+    'text-teal-600',
+    'inset-ring',
+    'inset-ring-teal-600/10',
+    'dark:bg-teal-900/20',
+    'dark:text-teal-300',
+  ].join(' '),
 } as const
 
 type BadgeColor = keyof typeof colorMap
 
 export default function Badge({
   color = 'gray',
+  customStyles,
   children,
 }: {
   color?: BadgeColor
+  customStyles?: string
   children: React.ReactNode
 }) {
+  const baseStyles = 'inline-flex items-center rounded-full px-2 text-xs'
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2 text-xs font-medium ${colorMap[color]}`}
+      className={` ${customStyles ? customStyles : baseStyles} ${colorMap[color]}`}
     >
       {children}
     </span>

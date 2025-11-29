@@ -62,7 +62,7 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'I’m Spencer Sharp. I live in New York City, where I design the future.',
+    'I’m Paul Barrón, a Houston-based engineer building things with tech.',
 }
 
 export default function About() {
@@ -94,16 +94,17 @@ export default function About() {
             <p>
               I’ve always been the type who needs to know how things work. I
               started tinkering in the dial-up and AOL days, breaking and fixing
-              anything I could. Before I wrote a line of code, I spent years doing
-              design, video editing, and running a small marketing agency. That
-              mix of experience eventually led me into software engineering.
+              anything I could. Before I wrote a line of code, I spent years
+              doing design, video editing, and running a small marketing agency.
+              That mix of experience eventually led me into software
+              engineering.
             </p>
             <figure className="mt-10 border-l border-teal-600 pl-9 dark:border-teal-400">
               <blockquote className="font-semibold text-gray-900 dark:text-white">
                 <p>
-                 “Before I wrote a line of code, I spent years
-              designing, video editing, and running a small marketing agency. That
-              mix of experience eventually led me into software engineering.”
+                  “Before I wrote a line of code, I spent years designing, video
+                  editing, and running a small marketing agency. That mix of
+                  experience eventually led me into software engineering.”
                 </p>
               </blockquote>
             </figure>
@@ -122,15 +123,23 @@ export default function About() {
               how messy real-world systems can be and how much good software
               matters when it affects people’s lives.
             </p>
-<figure className="mt-10 border-l border-teal-600 pl-9 dark:border-teal-400">
+            <figure className="mt-10 border-l border-teal-600 pl-9 dark:border-teal-400">
               <blockquote className="font-semibold text-gray-900 dark:text-white">
                 <p>
-                "...I taught for years, which means I naturally lean toward breaking things down in a way that feels clear and welcoming."
+                  "...I taught for years, which means I naturally lean toward
+                  breaking things down in a way that feels clear and welcoming."
                 </p>
               </blockquote>
             </figure>
             <p>
-              Today, I work at the overlap of engineering, systems design, and operations, building systems that help real people in complex, high-stakes environments. Before tech, I taught for years, which means I naturally lean toward breaking things down in a way that feels clear and welcoming. This space lets me do that. It’s where I show the work, the process, and the things I’m still figuring out, so others — especially young Latino professionals — can see a path into tech that feels a little more like theirs.
+              Today, I work at the overlap of engineering, systems design, and
+              operations, building systems that help real people in complex,
+              high-stakes environments. Before tech, I taught for years, which
+              means I naturally lean toward breaking things down in a way that
+              feels clear and welcoming. This space lets me do that. It’s where
+              I show the work, the process, and the things I’m still figuring
+              out, so others — especially young Latino professionals — can see a
+              path into tech that feels a little more like theirs.
             </p>
           </div>
         </div>

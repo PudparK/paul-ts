@@ -1,51 +1,20 @@
 import { type Metadata } from 'next'
 import Image from 'next/image'
+import {} from '@heroicons/react/24/solid'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
-import logoAnimaginary from '@/images/logos/animaginary.svg'
-import logoCosmos from '@/images/logos/cosmos.svg'
-import logoHelioStream from '@/images/logos/helio-stream.svg'
-import logoOpenShuttle from '@/images/logos/open-shuttle.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
+import Badge from '@/components/Badge'
 
-const projects = [
-  {
-    name: 'Planetaria',
-    description:
-      'Creating technology to empower civilians to explore space on their own terms.',
-    link: { href: 'http://planetaria.tech', label: 'planetaria.tech' },
-    logo: logoPlanetaria,
-  },
-  {
-    name: 'Animaginary',
-    description:
-      'High performance web animation library, hand-written in optimized WASM.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoAnimaginary,
-  },
-  {
-    name: 'HelioStream',
-    description:
-      'Real-time video streaming library, optimized for interstellar transmission.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoHelioStream,
-  },
-  {
-    name: 'cosmOS',
-    description:
-      'The operating system that powers our Planetaria space shuttles.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoCosmos,
-  },
-  {
-    name: 'OpenShuttle',
-    description:
-      'The schematics for the first rocket I designed that successfully made it to orbit.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoOpenShuttle,
-  },
-]
+type GitHubRepo = {
+  id: number
+  name: string
+  html_url: string
+  description: string | null
+  homepage: string | null
+  fork: boolean
+  language: string | null
+}
 
 function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -58,39 +27,128 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-export const metadata: Metadata = {
-  title: 'Projects',
-  description: 'Things I’ve made trying to put my dent in the universe.',
+async function detectJsFramework(repoName: string): Promise<string[]> {
+  try {
+    const res = await fetch(
+      `https://raw.githubusercontent.com/PudparK/${repoName}/main/package.json`,
+    )
+
+    if (!res.ok) {
+      return []
+    }
+
+    const pkg = await res.json()
+    const deps = {
+      ...(pkg.dependencies || {}),
+      ...(pkg.devDependencies || {}),
+    }
+
+    const attributes: string[] = []
+
+    if (deps.next) attributes.push('Next.js')
+    if (deps.react) attributes.push('React')
+    if (deps['react-native']) attributes.push('React Native')
+    if (deps.express) attributes.push('Express')
+    if (deps.tailwindcss) attributes.push('Tailwind')
+    if (deps.vite) attributes.push('Vite')
+    if (deps['@nestjs/core']) attributes.push('NestJS')
+    if (deps.prisma) attributes.push('Prisma')
+
+    return attributes
+  } catch (err) {
+    console.log('❌ Failed to detect framework for', repoName, err)
+    return []
+  }
 }
 
-export default function Projects() {
+export const metadata: Metadata = {
+  title: 'Projects',
+  description: 'Things I’ve built along the way.',
+}
+
+async function getProjectsFromGitHub() {
+  const res = await fetch(
+    'https://api.github.com/users/PudparK/repos?sort=updated&per_page=12',
+    {
+      headers: {
+        Accept: 'application/vnd.github+json',
+      },
+      // cache / revalidate every 6 hours
+      next: { revalidate: 60 * 60 * 6 },
+    },
+  )
+
+  if (!res.ok) {
+    console.log('❌ Failed to fetch GitHub repos', res.status) // 🧪
+    return []
+  }
+
+  const repos: GitHubRepo[] = await res.json()
+
+  const filtered = repos.filter((repo) => !repo.fork)
+
+  return await Promise.all(
+    filtered.map(async (repo, index) => {
+      const frameworkAttributes = await detectJsFramework(repo.name)
+
+      const attributes = [
+        ...(repo.language ? [repo.language] : []),
+        ...frameworkAttributes,
+      ]
+
+      return {
+        name: repo.name,
+        description:
+          repo.description ??
+          'No description provided yet. Check out the repo for more details.',
+        link: {
+          href: repo.html_url,
+          label: repo.homepage || 'github.com',
+        },
+        attributes,
+      }
+    }),
+  )
+}
+
+export default async function Projects() {
+  const projects = await getProjectsFromGitHub()
   return (
     <SimpleLayout
-      title="Things I’ve made trying to put my dent in the universe."
-      intro="I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+      title="Things I’ve built along the way."
+      intro="A collection of things I’ve built, some to learn, some to fix real problems, and some just because I was curious."
     >
       <ul
         role="list"
         className="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
       >
         {projects.map((project) => (
-          <Card as="li" key={project.name}>
-            <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <Image
-                src={project.logo}
-                alt=""
-                className="h-8 w-8"
-                unoptimized
-              />
+          <Card as="li" key={project.name} className="group">
+            <div className="flex items-center gap-2">
+              <div className="relative z-10 h-2 w-2 rounded-full bg-teal-500/60 transition-colors duration-200 group-hover:bg-teal-500"></div>
+
+              <h2 className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+                <Card.Link href={project.link.href}>{project.name}</Card.Link>
+              </h2>
             </div>
-            <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
-              <Card.Link href={project.link.href}>{project.name}</Card.Link>
-            </h2>
             <Card.Description>{project.description}</Card.Description>
+
             <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-teal-500 dark:text-zinc-200">
               <LinkIcon className="h-6 w-6 flex-none" />
               <span className="ml-2">{project.link.label}</span>
             </p>
+
+            <div className="relative z-10 mt-4 flex flex-wrap gap-2">
+              {project.attributes.map((attr) => (
+                <Badge
+                  key={attr}
+                  color="softTeal"
+                  customStyles="inline-flex items-center rounded-full px-2 text-xs"
+                >
+                  {attr}
+                </Badge>
+              ))}
+            </div>
           </Card>
         ))}
       </ul>
