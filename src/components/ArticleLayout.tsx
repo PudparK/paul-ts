@@ -8,6 +8,7 @@ import { Container } from '@/components/Container'
 import { Prose } from '@/components/Prose'
 import { type ArticleWithSlug } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
+import { BuyMeACoffee } from './BuyMeACoffee'
 
 function ArrowLeftIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -59,9 +60,17 @@ export function ArticleLayout({
                 <span className="ml-3">{formatDate(article.date)}</span>
               </time>
             </header>
+            <BuyMeACoffee />
             <Prose className="mt-8" data-mdx-content>
               {children}
             </Prose>
+            <div className="mt-12 text-zinc-500 dark:text-zinc-400">
+              Thanks for visiting. If you’d like to support my work (or help me
+              chip away at taxes and school debt), you can buy me a coffee.
+              <div className="mt-4">
+                <BuyMeACoffee />
+              </div>
+            </div>
           </article>
         </div>
       </div>
