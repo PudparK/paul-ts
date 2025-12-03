@@ -13,6 +13,33 @@ import {
 import portraitImage from '@/images/portrait.jpg'
 import Badge from '@/components/Badge'
 
+export const metadata: Metadata = {
+  title: 'About',
+  description:
+    'I’m Paul Barrón, a Houston-based engineer building things with tech.',
+  openGraph: {
+    title: 'About – Paul Barrón',
+    description:
+      'Learn more about Paul Barrón — a Houston-based engineer working at the overlap of engineering, systems, and operations.',
+    url: '/about',
+    type: 'profile',
+    images: [
+      {
+        url: '/og-about.png', // lives in /public
+        width: 1200,
+        height: 630,
+        alt: 'About page preview for Paul Barrón',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About – Paul Barrón',
+    description:
+      'Learn more about Paul Barrón — a Houston-based engineer building things with tech.',
+    images: ['/og-about.png'],
+  },
+}
 const attributes = [
   'Father',
   'Hip Hop Head',
@@ -57,12 +84,6 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
       />
     </svg>
   )
-}
-
-export const metadata: Metadata = {
-  title: 'About',
-  description:
-    'I’m Paul Barrón, a Houston-based engineer building things with tech.',
 }
 
 export default function About() {
