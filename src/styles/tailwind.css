@@ -38,3 +38,16 @@
   --color-page-muted: #4f2c1a; /* secondary text */
   --color-page-accent: #8a4b2a; /* accent (links, buttons) */
 }
+
+@keyframes steam {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(-2px);
+    opacity: 0.85;
+  }
+}

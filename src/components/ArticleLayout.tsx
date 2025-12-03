@@ -60,17 +60,18 @@ export function ArticleLayout({
                 <span className="ml-3">{formatDate(article.date)}</span>
               </time>
             </header>
-            <BuyMeACoffee />
             <Prose className="mt-8" data-mdx-content>
               {children}
             </Prose>
-            <div className="mt-12 text-zinc-500 dark:text-zinc-400">
-              Thanks for visiting. If you’d like to support my work (or help me
-              chip away at taxes and school debt), you can buy me a coffee.
-              <div className="mt-4">
+            <section className="mt-12 border-t border-zinc-200 pt-8 dark:border-zinc-700/40">
+              <p className="mx-auto mb-4 max-w-sm text-center text-sm text-zinc-500 dark:text-zinc-400">
+                If you enjoyed this, you can support my writing (and help me
+                chip away at taxes and school debt) by buying me a coffee.
+              </p>
+              <div className="mt-6 flex items-center justify-center gap-x-6">
                 <BuyMeACoffee />
               </div>
-            </div>
+            </section>
           </article>
         </div>
       </div>
