@@ -5,6 +5,8 @@ import React from 'react'
 import { ArticleLayout } from '@/components/ArticleLayout'
 import type { ArticleWithSlug } from '@/lib/articles'
 import { getAllArticles } from '@/lib/articles'
+import { SubstackContent } from '@/components/SubstackContent'
+
 import {
   getSubstackPostBySlug,
   getSubstackPosts,
@@ -27,6 +29,18 @@ type SubstackArticleLoaded = {
 }
 
 type LoadedArticle = MdxArticleLoaded | SubstackArticleLoaded
+
+function extractFirstImageUrlFromHtml(html?: string | null): string | null {
+  if (!html) return null
+
+  // Simple regex: find the first <img ... src="...">
+  const match = html.match(/<img[^>]+src="([^"]+)"/i)
+  if (match && match[1]) {
+    return match[1]
+  }
+
+  return null
+}
 
 async function loadMdxArticle(slug: string): Promise<MdxArticleLoaded | null> {
   try {
@@ -103,9 +117,38 @@ export async function generateMetadata({
   }
 
   const { post } = loaded
+  const ogImageUrl = extractFirstImageUrlFromHtml(post.contentHtml)
+
   return {
     title: post.title,
     description: post.description,
+    openGraph: ogImageUrl
+      ? {
+          title: post.title,
+          description: post.description ?? undefined,
+          images: [
+            {
+              url: ogImageUrl,
+              alt: post.title,
+            },
+          ],
+        }
+      : {
+          title: post.title,
+          description: post.description ?? undefined,
+        },
+    twitter: ogImageUrl
+      ? {
+          card: 'summary_large_image',
+          title: post.title,
+          description: post.description ?? undefined,
+          images: [ogImageUrl],
+        }
+      : {
+          card: 'summary',
+          title: post.title,
+          description: post.description ?? undefined,
+        },
   }
 }
 
@@ -134,10 +177,7 @@ export default async function ArticlePage({ params }: PageProps) {
 
   return (
     <ArticleLayout article={article}>
-      <div
-        className="prose-zinc prose max-w-none dark:prose-invert"
-        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-      />
+      <SubstackContent html={post.contentHtml} />
       <p className="mt-8 text-sm text-zinc-500 dark:text-zinc-400">
         Originally published on{' '}
         <a

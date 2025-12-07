@@ -23,6 +23,7 @@ import image5 from '@/images/photos/image-5.jpg'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 import { Newsletter } from '@/components/NewsLetter'
+import { getSubstackPosts } from '@/lib/getSubstackPosts'
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -225,7 +226,7 @@ function Photos() {
 }
 
 export default async function Home() {
-  let articles = (await getAllArticles()).slice(0, 4)
+  let articles = (await getSubstackPosts()).slice(0, 4)
 
   return (
     <>
