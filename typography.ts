@@ -2,6 +2,11 @@ import { type Config } from 'tailwindcss'
 
 export default {
   theme: {
+    extend: {
+      colors: {
+        substack: 'var(--color-substack)',
+      },
+    },
     typography: ({ theme }) => ({
       invert: {
         css: {

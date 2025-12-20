@@ -37,6 +37,7 @@
   --color-page-fg: #fbf6ed; /* main text color (warm dark) */
   --color-page-muted: #4f2c1a; /* secondary text */
   --color-page-accent: #8a4b2a; /* accent (links, buttons) */
+  --color-substack: #ff6719; /* substack orange */
 }
 
 @keyframes steam {

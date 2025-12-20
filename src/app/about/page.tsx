@@ -12,6 +12,7 @@ import {
 } from '@/components/SocialIcons'
 import portraitImage from '@/images/portrait.jpg'
 import Badge from '@/components/Badge'
+import { Prose } from '@/components/Prose'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -120,15 +121,15 @@ export default function About() {
               That mix of experience eventually led me into software
               engineering.
             </p>
-            <figure className="mt-10 border-l border-teal-600 pl-9 dark:border-teal-400">
-              <blockquote className="font-semibold text-gray-900 dark:text-white">
+            <Prose>
+              <blockquote>
                 <p>
-                  “Before I wrote a line of code, I spent years designing, video
+                  Before I wrote a line of code, I spent years designing, video
                   editing, and running a small marketing agency. That mix of
-                  experience eventually led me into software engineering.”
+                  experience eventually led me into software engineering.
                 </p>
               </blockquote>
-            </figure>
+            </Prose>
             <p>
               I never took the traditional CS route. No coding camps, no early
               classes. I learned by doing. Trial and error, late nights, broken
@@ -144,14 +145,14 @@ export default function About() {
               how messy real-world systems can be and how much good software
               matters when it affects people’s lives.
             </p>
-            <figure className="mt-10 border-l border-teal-600 pl-9 dark:border-teal-400">
-              <blockquote className="font-semibold text-gray-900 dark:text-white">
+            <Prose>
+              <blockquote>
                 <p>
-                  "...I taught for years, which means I naturally lean toward
-                  breaking things down in a way that feels clear and welcoming."
+                  ...I taught for years, which means I naturally lean toward
+                  breaking things down in a way that feels clear and welcoming.
                 </p>
               </blockquote>
-            </figure>
+            </Prose>
             <p>
               Today, I work at the overlap of engineering, systems design, and
               operations, building systems that help real people in complex,

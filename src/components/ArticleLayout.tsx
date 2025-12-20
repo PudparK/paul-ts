@@ -64,9 +64,12 @@ export function ArticleLayout({
               {children}
             </Prose>
             <section className="mt-12 border-t border-zinc-200 pt-8 dark:border-zinc-700/40">
-              <p className="mx-auto mb-4 max-w-sm text-center text-sm text-zinc-500 dark:text-zinc-400">
-                If you enjoyed this, you can support my writing (and help me
-                chip away at taxes and school debt) with a coffee.
+              <p className="mx-auto mb-4 max-w-xl text-center text-sm text-zinc-500 italic dark:text-zinc-400">
+                I write about how systems influence behavior, often in subtle
+                ways. Not to explain everything, but to slow things down enough
+                to see what’s usually missed. The aim is to help build better
+                mental models. If this resonated, you can support my writing
+                with a coffee.
               </p>
               <div className="mt-6 flex items-center justify-center gap-x-6">
                 <BuyMeACoffee />
