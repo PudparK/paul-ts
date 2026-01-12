@@ -1,4 +1,5 @@
 import { type Metadata } from 'next'
+import { decodeSubstackExcerpt } from '@/lib/decodeHtml'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
@@ -9,7 +10,7 @@ import { type SubstackPost, getSubstackPosts } from '@/lib/getSubstackPosts'
 export const revalidate = 3600
 
 function Article({ post }: { post: SubstackPost }) {
-  const preview = post.description ?? ''
+  const preview = decodeSubstackExcerpt(post.description)
   const hasDate = post.date && !Number.isNaN(new Date(post.date).getTime())
   const displayDate = hasDate ? formatDate(post.date) : ''
 
@@ -27,10 +28,7 @@ function Article({ post }: { post: SubstackPost }) {
           {displayDate}
         </Card.Eyebrow>
 
-        <Card.Description>
-          {preview}
-          {preview.length >= 280 ? '…' : ''}
-        </Card.Description>
+        <Card.Description>{preview}...</Card.Description>
 
         <Card.Cta>Read article</Card.Cta>
       </Card>

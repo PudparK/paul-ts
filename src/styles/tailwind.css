@@ -71,6 +71,6 @@
 
 @media (min-width: 768px) {
   .substack-body img {
-    max-width: 80%;
+    max-width: 100%;
   }
 }

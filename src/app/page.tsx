@@ -24,6 +24,7 @@ import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 import { Newsletter } from '@/components/NewsLetter'
 import { getSubstackPosts } from '@/lib/getSubstackPosts'
+import { decodeSubstackExcerpt } from '@/lib/decodeHtml'
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -70,7 +71,9 @@ function Article({ article }: { article: ArticleWithSlug }) {
       <Card.Eyebrow as="time" dateTime={article.date} decorate>
         {formatDate(article.date)}
       </Card.Eyebrow>
-      <Card.Description>{article.description}</Card.Description>
+      <Card.Description>
+        {decodeSubstackExcerpt(article.description)}...
+      </Card.Description>
       <Card.Cta>Read article</Card.Cta>
     </Card>
   )
