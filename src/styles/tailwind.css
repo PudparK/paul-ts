@@ -74,3 +74,21 @@
     max-width: 100%;
   }
 }
+
+.substack-body :where(h2) {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.substack-body :where(p + h2) {
+  margin-top: 1.75rem;
+}
+
+.substack-body :where(ul > li) {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.substack-body :where(li > p) {
+  margin: 0;
+}

@@ -73,6 +73,8 @@ export default {
           '--tw-prose-invert-pre-border': theme('colors.zinc.200 / 0.1'),
           '--tw-prose-invert-th-borders': theme('colors.zinc.700'),
           '--tw-prose-invert-td-borders': theme('colors.zinc.800'),
+          '--tw-prose-quotes': theme('colors.zinc.600'),
+          '--tw-prose-invert-quotes': theme('colors.zinc.400'),
 
           // Base
           color: 'var(--tw-prose-body)',
