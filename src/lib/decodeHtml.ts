@@ -5,7 +5,7 @@ export function decodeHtml(input?: string) {
   return decode(input)
 }
 
-export function decodeSubstackExcerpt(input?: string | null) {
+export function cleanEncodedPlainText(input?: string | null) {
   if (!input) return ''
 
   // Remove dangling/truncated entities at the end (common in Substack RSS excerpts)

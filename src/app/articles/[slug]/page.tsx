@@ -12,6 +12,7 @@ import {
   getSubstackPosts,
   type SubstackPost,
 } from '@/lib/getSubstackPosts'
+import { cleanEncodedPlainText } from '@/lib/decodeHtml'
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -110,44 +111,38 @@ export async function generateMetadata({
 
   if (loaded.type === 'mdx') {
     const { article } = loaded
-    return {
-      title: article.title,
-      description: article.description,
-    }
+    const title = cleanEncodedPlainText(article.title)
+    const description = cleanEncodedPlainText(article.description)
+
+    return { title, description }
   }
 
   const { post } = loaded
   const ogImageUrl = extractFirstImageUrlFromHtml(post.contentHtml)
+  const title = cleanEncodedPlainText(post.title)
+  const description = post.description
+    ? cleanEncodedPlainText(post.description)
+    : undefined
 
   return {
-    title: post.title,
-    description: post.description,
-    openGraph: ogImageUrl
-      ? {
-          title: post.title,
-          description: post.description ?? undefined,
-          images: [
-            {
-              url: ogImageUrl,
-              alt: post.title,
-            },
-          ],
-        }
-      : {
-          title: post.title,
-          description: post.description ?? undefined,
-        },
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      ...(ogImageUrl ? { images: [{ url: ogImageUrl, alt: title }] } : {}),
+    },
     twitter: ogImageUrl
       ? {
           card: 'summary_large_image',
-          title: post.title,
-          description: post.description ?? undefined,
+          title,
+          description,
           images: [ogImageUrl],
         }
       : {
           card: 'summary',
-          title: post.title,
-          description: post.description ?? undefined,
+          title,
+          description,
         },
   }
 }
@@ -168,10 +163,12 @@ export default async function ArticlePage({ params }: PageProps) {
   const { post } = loaded
 
   const article: ArticleWithSlug = {
-    title: post.title,
+    title: cleanEncodedPlainText(post.title),
     date: post.date,
     author: post.author,
-    description: post.description,
+    description: post.description
+      ? cleanEncodedPlainText(post.description)
+      : '',
     slug,
   }
 

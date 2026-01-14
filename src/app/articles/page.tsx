@@ -1,5 +1,5 @@
 import { type Metadata } from 'next'
-import { decodeSubstackExcerpt } from '@/lib/decodeHtml'
+import { cleanEncodedPlainText } from '@/lib/decodeHtml'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
@@ -10,7 +10,7 @@ import { type SubstackPost, getSubstackPosts } from '@/lib/getSubstackPosts'
 export const revalidate = 3600
 
 function Article({ post }: { post: SubstackPost }) {
-  const preview = decodeSubstackExcerpt(post.description)
+  const preview = cleanEncodedPlainText(post.description)
   const hasDate = post.date && !Number.isNaN(new Date(post.date).getTime())
   const displayDate = hasDate ? formatDate(post.date) : ''
 
