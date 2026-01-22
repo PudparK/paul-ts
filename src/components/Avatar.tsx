@@ -25,7 +25,7 @@ export default function Avatar({
       {...props}
     >
       <Image
-        src="/api/avatar"
+        src={avatarFallback}
         alt=""
         width={size}
         height={size}
