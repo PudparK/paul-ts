@@ -79,15 +79,10 @@ export default {
           // Base
           color: 'var(--tw-prose-body)',
           lineHeight: theme('lineHeight.7'),
-          '> *': {
-            marginTop: theme('spacing.10'),
-            marginBottom: theme('spacing.10'),
-          },
           p: {
             marginTop: theme('spacing.7'),
             marginBottom: theme('spacing.7'),
           },
-
           // Headings
           'h2, h3': {
             color: 'var(--tw-prose-headings)',
