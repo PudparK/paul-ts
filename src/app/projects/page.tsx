@@ -1,6 +1,4 @@
 import { type Metadata } from 'next'
-import Image from 'next/image'
-import {} from '@heroicons/react/24/solid'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
@@ -14,6 +12,36 @@ type GitHubRepo = {
   homepage: string | null
   fork: boolean
   language: string | null
+}
+
+function normalizeUrl(value: string | null): string | null {
+  if (!value) return null
+
+  const trimmed = value.trim()
+  if (!trimmed) return null
+
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    return trimmed
+  }
+
+  return `https://${trimmed}`
+}
+
+function isGitHubUrl(value: string): boolean {
+  try {
+    return new URL(value).hostname.toLowerCase().includes('github.com')
+  } catch {
+    return false
+  }
+}
+
+function toLabel(value: string): string {
+  try {
+    const url = new URL(value)
+    return `${url.hostname}${url.pathname === '/' ? '' : url.pathname}`
+  } catch {
+    return value
+  }
 }
 
 function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -88,7 +116,7 @@ async function getProjectsFromGitHub() {
   const filtered = repos.filter((repo) => !repo.fork)
 
   return await Promise.all(
-    filtered.map(async (repo, index) => {
+    filtered.map(async (repo) => {
       const frameworkAttributes = await detectJsFramework(repo.name)
 
       const attributes = [
@@ -96,14 +124,18 @@ async function getProjectsFromGitHub() {
         ...frameworkAttributes,
       ]
 
+      const homepageUrl = normalizeUrl(repo.homepage)
+      const useHomepage = homepageUrl !== null && !isGitHubUrl(homepageUrl)
+      const href = useHomepage ? homepageUrl : repo.html_url
+
       return {
         name: repo.name,
         description:
           repo.description ??
           'No description provided yet. Check out the repo for more details.',
         link: {
-          href: repo.html_url,
-          label: repo.homepage || 'github.com',
+          href,
+          label: toLabel(href),
         },
         attributes,
       }
@@ -128,15 +160,28 @@ export default async function Projects() {
               <div className="relative z-10 h-2 w-2 rounded-full bg-teal-500/60 transition-colors duration-200 group-hover:bg-teal-500"></div>
 
               <h2 className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-                <Card.Link href={project.link.href}>{project.name}</Card.Link>
+                <Card.Link
+                  href={project.link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {project.name}
+                </Card.Link>
               </h2>
             </div>
             <Card.Description>{project.description}</Card.Description>
 
-            <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-teal-500 dark:text-zinc-200">
-              <LinkIcon className="h-6 w-6 flex-none" />
-              <span className="ml-2">{project.link.label}</span>
-            </p>
+            <div className="relative z-10 mt-6 flex items-center text-sm font-medium text-zinc-400 dark:text-zinc-200">
+              <a
+                href={project.link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex transition group-hover:text-teal-500"
+              >
+                <LinkIcon className="h-6 w-6 flex-none" />
+                <span className="ml-2">{project.link.label}</span>
+              </a>
+            </div>
 
             <div className="relative z-10 mt-4 flex flex-wrap gap-2">
               {project.attributes.map((attr) => (
