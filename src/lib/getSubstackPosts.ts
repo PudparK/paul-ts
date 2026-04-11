@@ -1,4 +1,5 @@
 import Parser from 'rss-parser'
+import { normalizeSubstackHtml } from './normalizeSubstackHtml'
 
 type SubstackItem = {
   title: string
@@ -58,28 +59,31 @@ export async function getSubstackPosts(limit = 10): Promise<SubstackPost[]> {
     const feed = await parser.parseString(xml)
     const items = feed.items ?? []
 
-    return items.slice(0, limit).map((item) => {
-      const contentHtml =
-        item['content:encoded'] || item.content || item.contentSnippet || ''
+    return await Promise.all(
+      items.slice(0, limit).map(async (item) => {
+        const contentHtml =
+          item['content:encoded'] || item.content || item.contentSnippet || ''
+        const normalizedContentHtml = await normalizeSubstackHtml(contentHtml)
 
-      const description = stripHtml(contentHtml).slice(0, 280)
+        const description = stripHtml(normalizedContentHtml).slice(0, 280)
 
-      // ✅ Normalize to YYYY-MM-DD like your MDX frontmatter
-      const rawDate = item.isoDate ? new Date(item.isoDate) : new Date()
-      const normalizedDate = isNaN(rawDate.getTime())
-        ? ''
-        : rawDate.toISOString().split('T')[0]
+        // ✅ Normalize to YYYY-MM-DD like your MDX frontmatter
+        const rawDate = item.isoDate ? new Date(item.isoDate) : new Date()
+        const normalizedDate = isNaN(rawDate.getTime())
+          ? ''
+          : rawDate.toISOString().split('T')[0]
 
-      return {
-        title: item.title,
-        url: item.link,
-        slug: extractSlug(item.link),
-        date: normalizedDate, // <-- now looks like "2025-12-02"
-        description,
-        contentHtml,
-        author: item.creator || 'Paul Barron',
-      }
-    })
+        return {
+          title: item.title,
+          url: item.link,
+          slug: extractSlug(item.link),
+          date: normalizedDate, // <-- now looks like "2025-12-02"
+          description,
+          contentHtml: normalizedContentHtml,
+          author: item.creator || 'Paul Barron',
+        }
+      }),
+    )
   } catch (err) {
     console.error('❌ Error while parsing Substack RSS:', err)
     return []
