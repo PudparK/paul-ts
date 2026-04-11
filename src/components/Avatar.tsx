@@ -39,7 +39,6 @@ export default function Avatar({
           // @ts-ignore: next/image internal element
           event.currentTarget.src = avatarFallback.src
         }}
-        priority
       />
     </Link>
   )
